@@ -10,7 +10,6 @@ int sig_check(){
         fprintf(stderr,"Path %s does not exist ,exiting now",SIGNATURE_PATH);
         //compile backdoor first
         //might have to use make for this damn thing
-         char compile_command[512];  
         return 0;
     }
 }
