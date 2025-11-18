@@ -5,5 +5,5 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-int closeConnection();
+int if_running();
 void create();

